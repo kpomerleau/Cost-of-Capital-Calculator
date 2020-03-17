@@ -98,21 +98,25 @@ class Specification(paramtools.Parameters):
         # Compute firm after-tax rates of return
         r_prime = pf.calc_r_prime(self, f_dict, E_dict)
 
+        #############################
+        #TURN THIS OFF-DOESNT MAKE SENSE:
+
         # if no entity level taxes on pass-throughs, ensure mettr and metr
         # on non-corp entities the same
-        if not self.PT_entity_tax_ind:
-            for f in self.financing_list:
-                r_prime['nc'][f] = self.s['nc'][f] + self.inflation_rate
+        #if not self.PT_entity_tax_ind:
+        #    for f in self.financing_list:
+        #        r_prime['nc'][f] = self.s['nc'][f] + self.inflation_rate
         # if entity level tax, assume distribute earnings at same rate corps
         # distribute dividends and these are taxed at dividends tax rate
         # (which seems likely).  Also implicitly assumed that if entity
         # level tax, then only additional taxes on pass-through income are
         # capital gains and dividend taxes
-        else:
+        #else:
             # keep debt and equity financing ratio the same even though now
             # entity level tax that might now favor debt
-            self.s['nc']['mix'] = (self.f_nc * self.s['nc']['d'] +
-                                   (1 - self.f_nc) * self.s['c']['e'])
+        #    self.s['nc']['mix'] = (self.f_nc * self.s['nc']['d'] +
+        #                           (1 - self.f_nc) * self.s['c']['e'])
+        #################################
         self.r_prime = r_prime
 
         # Map string tax methods into multiple of declining balance

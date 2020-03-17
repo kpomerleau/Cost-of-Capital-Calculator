@@ -10,7 +10,7 @@ Cost-of-Capital-Calculator Calculator class.
 import copy
 import pandas as pd
 from ccc.calcfunctions import (update_depr_methods, npv_tax_depr,
-                               eq_coc, eq_coc_inventory, eq_ucc,
+                               eq_coc, eq_coc_inventory, eq_coc_ip, eq_ucc,
                                eq_metr, eq_mettr, eq_tax_wedge, eq_eatr)
 from ccc.parameters import Specification
 from ccc.data import Assets
@@ -139,12 +139,20 @@ class Calculator():
             for f in self.__p.financing_list:
                 dfs[t]['z_' + str(f)] = npv_tax_depr(
                     dfs[t], self.__p.r[t][f], self.__p.inflation_rate,
-                    self.__p.land_expensing)
+                    self.__p.land_expensing, self.__p.ip_amortization)
                 dfs[t]['rho_' + str(f)] = eq_coc(
                     dfs[t]['delta'], dfs[t]['z_' + str(f)],
                     self.__p.property_tax,
-                    self.__p.u[t], self.__p.inv_tax_credit,
+                    self.__p.u[t],
                     self.__p.inflation_rate, self.__p.r[t][f])
+                idxx = dfs[t]['major_asset_group'] == 'Intellectual Property'
+                dfs[t].loc[idxx, 'rho_' + str(f)] = eq_coc_ip(
+                    dfs[t]['delta'], dfs[t]['z_' + str(f)],
+                    self.__p.property_tax,
+                    self.__p.u[t],
+                    self.__p.inv_tax_credit,
+                    self.__p.inflation_rate,
+                    self.__p.r[t][f])
                 if not self.__p.inventory_expensing:
                     idx = dfs[t]['asset_name'] == 'Inventories'
                     dfs[t].loc[idx, 'rho_' + str(f)] = eq_coc_inventory(

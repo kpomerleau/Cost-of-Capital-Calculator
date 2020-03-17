@@ -116,7 +116,7 @@ def econ(delta, bonus, r, pi):
     return z
 
 
-def npv_tax_depr(df, r, pi, land_expensing):
+def npv_tax_depr(df, r, pi, land_expensing, ip_amortization):
     '''
     Depending on the method of depreciation, makes calls to either
     the straight line or declining balance calculations.
@@ -144,11 +144,14 @@ def npv_tax_depr(df, r, pi, land_expensing):
     df.loc[idx, 'z'] = 1.0
     idx = df['asset_name'] == 'Land'
     df.loc[idx, 'z'] = land_expensing
+    #for amortization of R&D
+    idxx = (df['major_asset_group'] == 'Intellectual Property') & (df['Method'] == 'Expensing') & (ip_amortization == True)
+    df.loc[idxx, 'z'] = sl(5, 0, r)
     z = df['z']
     return z
 
 
-def eq_coc(delta, z, w, u, inv_tax_credit, pi, r):
+def eq_coc(delta, z, w, u, pi, r):
     r'''
     Compute the cost of capital
 
@@ -162,7 +165,7 @@ def eq_coc(delta, z, w, u, inv_tax_credit, pi, r):
         w (scalar): property tax rate
         u (scalar): statutory marginal tax rate for the first layer of
             income taxes
-        inv_tax_credit (scalar): investment tax credit rate
+        (REMOVED) inv_tax_credit (scalar): investment tax credit rate
         pi (scalar): inflation rate
         r (scalar): discount rate
 
@@ -171,9 +174,36 @@ def eq_coc(delta, z, w, u, inv_tax_credit, pi, r):
 
     '''
     rho = (((r - pi + delta) / (1 - u)) *
-           (1 - inv_tax_credit - u * z) + w - delta)
+           (1 - u * z) + w - delta)
     return rho
 
+def eq_coc_ip(delta, z, w, u, inv_tax_credit, pi, r):
+    r'''
+    Compute the cost of capital for intellectual property
+
+    .. math::
+        \rho = \frac{(r-\pi+\delta)}{1-u}(1-uz)+w-\delta
+
+    Args:
+        delta (array_like): rate of economic depreciation
+        z (array_like): net present value of depreciation deductions for
+            $1 of investment
+        w (scalar): property tax rate
+        u (scalar): statutory marginal tax rate for the first layer of
+            income taxes
+        inv_tax_credit (scalar): R&D investment tax credit rate
+        (1 - inv_tax_credit) is the basis adjustment for the credit
+        pi (scalar): inflation rate
+        r (scalar): discount rate
+
+    Returns:
+        rho (array_like): the cost of capital
+
+    '''
+    rho = (((r - pi + delta) / (1 - u)) *
+            (1 - inv_tax_credit - u * z) + w - delta)
+    
+    return rho
 
 def eq_coc_inventory(u, phi, Y_v, pi, r):
     r'''

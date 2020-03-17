@@ -885,6 +885,46 @@
             {
                 "year": 2015,
                 "value": 0.0
+            },
+            {
+                "year": 2020,
+                "value":0.0
+            },
+            {
+                "year": 2021,
+                "value":0.0
+            },
+            {
+                "year": 2022,
+                "value":0.0
+            },
+            {
+                "year": 2023,
+                "value":0.0
+            },
+            {
+                "year": 2024,
+                "value":0.0
+            },
+            {
+                "year": 2025,
+                "value":0.0
+            },
+            {
+                "year": 2026,
+                "value":0.0
+            },
+            {
+                "year": 2027,
+                "value":0.0
+            },
+            {
+                "year": 2028,
+                "value":0.0
+            },
+            {
+                "year": 2029,
+                "value":0.0
             }
         ],
         "validators": {
@@ -904,6 +944,46 @@
             {
                 "year": 2015,
                 "value": 0.0
+            },
+            {
+                "year": 2020,
+                "value":0.0
+            },
+            {
+                "year": 2021,
+                "value":0.0
+            },
+            {
+                "year": 2022,
+                "value":0.0
+            },
+            {
+                "year": 2023,
+                "value":0.0
+            },
+            {
+                "year": 2024,
+                "value":0.0
+            },
+            {
+                "year": 2025,
+                "value":0.0
+            },
+            {
+                "year": 2026,
+                "value":0.0
+            },
+            {
+                "year": 2027,
+                "value":0.0
+            },
+            {
+                "year": 2028,
+                "value":0.0
+            },
+            {
+                "year": 2029,
+                "value":0.0
             }
         ],
         "validators": {
@@ -2156,6 +2236,76 @@
             {
                 "year": 2015,
                 "value": false
+            }
+        ],
+        "validators": {}
+    },
+    "ip_amortization": {
+        "title": "Whether or not use the new view of dividend taxation",
+        "description": "Whether or not use the new view of dividend taxation.",
+        "section_1": "Accounting and Financial Policy",
+        "notes": "Under the new view of dividend taxation, dividend taxes do not influence investment decisions.  Under the old view, they do.",
+        "type": "bool",
+        "value": [
+            {
+                "year": 2015,
+                "value": false
+            },
+            {
+                "year": 2016,
+                "value": false
+            },
+            {
+                "year": 2017,
+                "value": false
+            },
+            {
+                "year": 2018,
+                "value": false
+            },
+            {
+                "year": 2019,
+                "value": false
+            },
+            {
+                "year": 2020,
+                "value": false
+            },
+            {
+                "year": 2021,
+                "value": false
+            },
+            {
+                "year": 2022,
+                "value": true
+            },
+            {
+                "year": 2023,
+                "value": true
+            },
+            {
+                "year": 2024,
+                "value": true
+            },
+            {
+                "year": 2025,
+                "value": true
+            },
+            {
+                "year": 2026,
+                "value": true
+            },
+            {
+                "year": 2027,
+                "value": true
+            },
+            {
+                "year": 2028,
+                "value": true
+            },
+            {
+                "year": 2029,
+                "value": true
             }
         ],
         "validators": {}
