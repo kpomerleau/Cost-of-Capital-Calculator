@@ -28,6 +28,11 @@ baseline_asset_results = pd.DataFrame()
 #warren_asset_results = pd.DataFrame()
 biden_asset_results = pd.DataFrame()
 sanders_asset_results = pd.DataFrame()
+biden_1_asset_results = pd.DataFrame()
+biden_2_asset_results = pd.DataFrame()
+sanders_1_asset_results = pd.DataFrame()
+sanders_2_asset_results = pd.DataFrame()
+sanders_3_asset_results = pd.DataFrame()
 #pete_asset_results = pd.DataFrame()
 
 baseline_industry_results = pd.DataFrame()
@@ -42,7 +47,14 @@ baseline_parameters = csv.DictReader(open("baseline_parameters.csv"))
 #warren_parameters = csv.DictReader(open("warren_parameters.csv"))
 biden_parameters = csv.DictReader(open("biden_parameters.csv"))
 sanders_parameters = csv.DictReader(open("sanders_parameters.csv"))
-#pete_parameters = csv.DictReader(open("pete_parameters.csv"))
+
+#For step-wise analysis
+biden_step_1 = csv.DictReader(open("biden_parameters_Step1_cost_recovery.csv"))
+biden_step_2 = csv.DictReader(open("biden_parameters_Step2_corporate_rate.csv"))
+sanders_step_1 = csv.DictReader(open("sanders_parameters_Step1_cost_recovery.csv"))
+sanders_step_2 = csv.DictReader(open("sanders_parameters_Step2_corporate_rate.csv"))
+sanders_step_3 = csv.DictReader(open("sanders_parameters_Step3_income_tax.csv"))
+
 
 for cyr in range(2020,2030):
 
@@ -51,7 +63,11 @@ for cyr in range(2020,2030):
     #warren = next(warren_parameters)
     biden = next(biden_parameters)
     sanders = next(sanders_parameters)
-    #mayor_pete = next(pete_parameters)
+    biden_1 = next(biden_step_1)
+    biden_2 = next(biden_step_2)
+    sanders_1 = next(sanders_step_1)
+    sanders_2 = next(sanders_step_2)
+    sanders_3 = next(sanders_step_3)
 
     # Setup baseline parameters
 
@@ -72,10 +88,26 @@ for cyr in range(2020,2030):
     sanders_simulation = Specification(year=cyr)
     sanders_simulation.update_specification(sanders)
     calc_sanders = Calculator(sanders_simulation, assets)
-    #Mayor Pete
-    #pete_simulation = Specification(year=cyr)
-    #pete_simulation.update_specification(mayor_pete)
-    #calc_pete = Calculator(pete_simulation, assets)
+    #Biden Step 1
+    biden_1_simulation = Specification(year=cyr)
+    biden_1_simulation.update_specification(biden_1)
+    calc_biden_1 = Calculator(biden_1_simulation, assets)
+    #Biden Step 2
+    biden_2_simulation = Specification(year=cyr)
+    biden_2_simulation.update_specification(biden_2)
+    calc_biden_2 = Calculator(biden_2_simulation, assets)
+    #Sanders Step 1
+    sanders_1_simulation = Specification(year=cyr)
+    sanders_1_simulation.update_specification(sanders_1)
+    calc_sanders_1 = Calculator(sanders_1_simulation, assets)
+    #Sanders Step 2
+    sanders_2_simulation = Specification(year=cyr)
+    sanders_2_simulation.update_specification(sanders_2)
+    calc_sanders_2 = Calculator(sanders_2_simulation, assets)
+    #Sanders Step 3
+    sanders_3_simulation = Specification(year=cyr)
+    sanders_3_simulation.update_specification(sanders_3)
+    calc_sanders_3 = Calculator(sanders_3_simulation, assets)
 
 
     # do calculations by asset
@@ -83,6 +115,11 @@ for cyr in range(2020,2030):
     #warren_asset_df = calc_warren.calc_by_asset()
     biden_asset_df = calc_biden.calc_by_asset()
     sanders_asset_df = calc_sanders.calc_by_asset()
+    biden_1_df = calc_biden_1.calc_by_asset()
+    biden_2_df = calc_biden_2.calc_by_asset()
+    sanders_1_df = calc_sanders_1.calc_by_asset()
+    sanders_2_df = calc_sanders_2.calc_by_asset()
+    sanders_3_df = calc_sanders_3.calc_by_asset()
     #pete_asset_df = calc_pete.calc_by_asset()
 
     #do calculations by industry
@@ -97,23 +134,35 @@ for cyr in range(2020,2030):
     #diff_industry_df = diff_two_tables(reform_industry_df, baseln_industry_df)
 
     #Create Year indicator
+
+    #Assets
     baseline_asset_df['year'] = str(cyr)
     #warren_asset_df['year'] = str(cyr)
     biden_asset_df['year'] = str(cyr)
     sanders_asset_df['year'] = str(cyr)
-    #pete_asset_df['year'] = str(cyr)
+    biden_1_df['year'] = str(cyr)
+    biden_2_df['year'] = str(cyr)
+    sanders_1_df['year'] = str(cyr)
+    sanders_2_df['year'] = str(cyr)
+    sanders_3_df['year'] = str(cyr)
 
+    #Industry
     baseline_industry_df['year'] = str(cyr)
     #warren_industry_df['year'] = str(cyr)
     biden_industry_df['year'] = str(cyr)
     sanders_industry_df['year'] = str(cyr)
-    #pete_industry_df['year'] = str(cyr)
+
 
     #Write data to result dataframe
     baseline_asset_results = pd.concat([baseline_asset_results, baseline_asset_df])
     #warren_asset_results = pd.concat([warren_asset_results, warren_asset_df])
     biden_asset_results = pd.concat([biden_asset_results, biden_asset_df])
     sanders_asset_results = pd.concat([sanders_asset_results, sanders_asset_df])
+    biden_1_asset_results = pd.concat([biden_1_asset_results, biden_1_df])
+    biden_2_asset_results = pd.concat([biden_2_asset_results, biden_2_df])
+    sanders_1_asset_results = pd.concat([sanders_1_asset_results, sanders_1_df])
+    sanders_2_asset_results = pd.concat([sanders_2_asset_results, sanders_2_df])
+    sanders_3_asset_results = pd.concat([sanders_3_asset_results, sanders_3_df])
     #pete_asset_results = pd.concat([pete_asset_results, pete_asset_df])
 
     baseline_industry_results = pd.concat([baseline_industry_results, baseline_industry_df])
@@ -165,6 +214,11 @@ drop_columns_industry = ['tax_wedge_d',
                 'z_e'
                 ]
 
+#For Standard Deviation Calculations
+baseline_asset_results_full = baseline_asset_results
+biden_asset_results_full = biden_asset_results
+sanders_asset_results_full = sanders_asset_results
+
 sort_columns_assets = ['tax_treat', 'asset_name', 'year']
 
 baseline_asset_results = baseline_asset_results.drop(columns=drop_columns_assets)
@@ -176,6 +230,11 @@ biden_industry_results = biden_industry_results.drop(columns=drop_columns_indust
 sanders_asset_results = sanders_asset_results.drop(columns=drop_columns_assets)
 sanders_industry_results = sanders_industry_results.drop(columns=drop_columns_industry)
 
+biden_1_asset_results = biden_1_asset_results.drop(columns=drop_columns_assets)
+biden_2_asset_results = biden_2_asset_results.drop(columns=drop_columns_assets)
+sanders_1_asset_results = sanders_1_asset_results.drop(columns=drop_columns_assets)
+sanders_2_asset_results = sanders_2_asset_results.drop(columns=drop_columns_assets)
+sanders_3_asset_results = sanders_3_asset_results.drop(columns=drop_columns_assets)
 
 baseline_asset_results = baseline_asset_results[(baseline_asset_results.asset_name == 'Equipment') |
                                     (baseline_asset_results.asset_name == 'Structures') |
@@ -198,17 +257,65 @@ sanders_asset_results = sanders_asset_results[(sanders_asset_results.asset_name 
                                     (sanders_asset_results.asset_name == 'Land') |
                                     (sanders_asset_results.asset_name == 'Overall')]
 
+biden_1_asset_results = biden_1_asset_results[(biden_1_asset_results.asset_name == 'Equipment') |
+                                    (biden_1_asset_results.asset_name == 'Structures') |
+                                    (biden_1_asset_results.asset_name == 'Intellectual Property') |
+                                    (biden_1_asset_results.asset_name == 'Inventories') |
+                                    (biden_1_asset_results.asset_name == 'Land') |
+                                    (biden_1_asset_results.asset_name == 'Overall')]
+
+biden_2_asset_results = biden_2_asset_results[(biden_2_asset_results.asset_name == 'Equipment') |
+                                    (biden_2_asset_results.asset_name == 'Structures') |
+                                    (biden_2_asset_results.asset_name == 'Intellectual Property') |
+                                    (biden_2_asset_results.asset_name == 'Inventories') |
+                                    (biden_2_asset_results.asset_name == 'Land') |
+                                    (biden_2_asset_results.asset_name == 'Overall')]
+
+sanders_1_asset_results = sanders_1_asset_results[(sanders_1_asset_results.asset_name == 'Equipment') |
+                                    (sanders_1_asset_results.asset_name == 'Structures') |
+                                    (sanders_1_asset_results.asset_name == 'Intellectual Property') |
+                                    (sanders_1_asset_results.asset_name == 'Inventories') |
+                                    (sanders_1_asset_results.asset_name == 'Land') |
+                                    (sanders_1_asset_results.asset_name == 'Overall')]
+
+
+sanders_2_asset_results = sanders_2_asset_results[(sanders_2_asset_results.asset_name == 'Equipment') |
+                                    (sanders_2_asset_results.asset_name == 'Structures') |
+                                    (sanders_2_asset_results.asset_name == 'Intellectual Property') |
+                                    (sanders_2_asset_results.asset_name == 'Inventories') |
+                                    (sanders_2_asset_results.asset_name == 'Land') |
+                                    (sanders_2_asset_results.asset_name == 'Overall')]
+
+sanders_3_asset_results = sanders_3_asset_results[(sanders_3_asset_results.asset_name == 'Equipment') |
+                                    (sanders_3_asset_results.asset_name == 'Structures') |
+                                    (sanders_3_asset_results.asset_name == 'Intellectual Property') |
+                                    (sanders_3_asset_results.asset_name == 'Inventories') |
+                                    (sanders_3_asset_results.asset_name == 'Land') |
+                                    (sanders_3_asset_results.asset_name == 'Overall')]
 
 baseline_asset_results = baseline_asset_results.sort_values(by = sort_columns_assets)
 biden_asset_results = biden_asset_results.sort_values(by = sort_columns_assets)
 sanders_asset_results = sanders_asset_results.sort_values(by = sort_columns_assets)
+biden_1_asset_results = biden_1_asset_results.sort_values(by = sort_columns_assets)
+biden_2_asset_results = biden_2_asset_results.sort_values(by = sort_columns_assets)
+sanders_1_asset_results = sanders_1_asset_results.sort_values(by = sort_columns_assets)
+sanders_2_asset_results = sanders_2_asset_results.sort_values(by = sort_columns_assets)
+sanders_3_asset_results = sanders_3_asset_results.sort_values(by = sort_columns_assets)
 
 # save dataframes to disk as csv files in this directory
 baseline_industry_results.to_csv('baseline_byindustry.csv', float_format='%.5f')
-#reform_industry_df.to_csv('reform_byindustry.csv', float_format='%.5f')
 baseline_asset_results.to_csv('baseline_results_assets.csv', float_format='%.5f')
 biden_asset_results.to_csv('biden_results_assets.csv', float_format='%.5f')
 sanders_asset_results.to_csv('sanders_results_assets.csv', float_format='%.5f')
+biden_1_asset_results.to_csv('biden_1_results_assets.csv', float_format='%.5f')
+biden_2_asset_results.to_csv('biden_2_results_assets.csv', float_format='%.5f')
+sanders_1_asset_results.to_csv('sanders_1_results_assets.csv', float_format='%.5f')
+sanders_2_asset_results.to_csv('sanders_2_results_assets.csv', float_format='%.5f')
+sanders_3_asset_results.to_csv('sanders_3_results_assets.csv', float_format='%.5f')
+
+baseline_asset_results_full.to_csv('baseline_results_assets_FULL.csv', float_format='%.5f')
+biden_asset_results_full.to_csv('biden_results_assets_FULL.csv', float_format='%.5f')
+sanders_asset_results_full.to_csv('sanders_results_assets_FULL.csv', float_format='%.5f')
 #results_industry_df.to_csv('results_industry.csv', float_format='%.5f')
 #reform_assets_df.to_csv('reform_byasset.csv', float_format='%.5f')
 #diff_industry_df.to_csv('changed_byindustry.csv', float_format='%.5f')
