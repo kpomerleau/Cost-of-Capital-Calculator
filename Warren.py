@@ -305,17 +305,21 @@ sanders_3_asset_results = sanders_3_asset_results.sort_values(by = sort_columns_
 # save dataframes to disk as csv files in this directory
 baseline_industry_results.to_csv('baseline_byindustry.csv', float_format='%.5f')
 baseline_asset_results.to_csv('baseline_results_assets.csv', float_format='%.5f')
+baseline_asset_results_full.to_csv('baseline_results_assets_FULL.csv', float_format='%.5f')
+
 biden_asset_results.to_csv('biden_results_assets.csv', float_format='%.5f')
-sanders_asset_results.to_csv('sanders_results_assets.csv', float_format='%.5f')
 biden_1_asset_results.to_csv('biden_1_results_assets.csv', float_format='%.5f')
 biden_2_asset_results.to_csv('biden_2_results_assets.csv', float_format='%.5f')
+biden_asset_results_full.to_csv('biden_results_assets_FULL.csv', float_format='%.5f')
+biden_industry_results.to_csv('biden_industry_results.csv', float_format='%.5f')
+
+sanders_asset_results.to_csv('sanders_results_assets.csv', float_format='%.5f')
 sanders_1_asset_results.to_csv('sanders_1_results_assets.csv', float_format='%.5f')
 sanders_2_asset_results.to_csv('sanders_2_results_assets.csv', float_format='%.5f')
 sanders_3_asset_results.to_csv('sanders_3_results_assets.csv', float_format='%.5f')
-
-baseline_asset_results_full.to_csv('baseline_results_assets_FULL.csv', float_format='%.5f')
-biden_asset_results_full.to_csv('biden_results_assets_FULL.csv', float_format='%.5f')
 sanders_asset_results_full.to_csv('sanders_results_assets_FULL.csv', float_format='%.5f')
+sanders_industry_results.to_csv('sanders_results_industry.csv', float_format='%.5f')
+
 #results_industry_df.to_csv('results_industry.csv', float_format='%.5f')
 #reform_assets_df.to_csv('reform_byasset.csv', float_format='%.5f')
 #diff_industry_df.to_csv('changed_byindustry.csv', float_format='%.5f')
