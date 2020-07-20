@@ -110,7 +110,8 @@
                 "choices": [
                     "GDS",
                     "ADS",
-                    "Economic"
+                    "Economic",
+                    "Expensing"
                 ]
             }
         }
@@ -207,7 +208,8 @@
                 "choices": [
                     "GDS",
                     "ADS",
-                    "Economic"
+                    "Economic",
+                    "Expensing"
                 ]
             }
         }
@@ -305,7 +307,8 @@
                 "choices": [
                     "GDS",
                     "ADS",
-                    "Economic"
+                    "Economic",
+                    "Expensing"
                 ]
             }
         }
@@ -402,7 +405,8 @@
                 "choices": [
                     "GDS",
                     "ADS",
-                    "Economic"
+                    "Economic",
+                    "Expensing"
                 ]
             }
         }
@@ -499,7 +503,8 @@
                 "choices": [
                     "GDS",
                     "ADS",
-                    "Economic"
+                    "Economic",
+                    "Expensing"
                 ]
             }
         }
@@ -596,7 +601,8 @@
                 "choices": [
                     "GDS",
                     "ADS",
-                    "Economic"
+                    "Economic",
+                    "Expensing"
                 ]
             }
         }
@@ -693,7 +699,8 @@
                 "choices": [
                     "GDS",
                     "ADS",
-                    "Economic"
+                    "Economic",
+                    "Expensing"
                 ]
             }
         }
@@ -734,7 +741,8 @@
                 "choices": [
                     "GDS",
                     "ADS",
-                    "Economic"
+                    "Economic",
+                    "Expensing"
                 ]
             }
         }
@@ -775,7 +783,8 @@
                 "choices": [
                     "GDS",
                     "ADS",
-                    "Economic"
+                    "Economic",
+                    "Expensing"
                 ]
             }
         }

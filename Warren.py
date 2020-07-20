@@ -191,7 +191,7 @@ drop_columns_assets = ['bea_asset_code',
                 'rho_mix',
                 'ucc_d',
                 'ucc_e',
-                'ucc_mix',
+                #'ucc_mix',
                 'z_d',
                 'z_e'
                 ]
