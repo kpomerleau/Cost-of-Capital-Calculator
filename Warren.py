@@ -101,9 +101,9 @@ for cyr in range(2020,2030):
     #sanders_1_simulation.update_specification(sanders_1)
     #calc_sanders_1 = Calculator(sanders_1_simulation, assets)
     #Sanders Step 2
-    sanders_2_simulation = Specification(year=cyr)
-    sanders_2_simulation.update_specification(sanders_2)
-    calc_sanders_2 = Calculator(sanders_2_simulation, assets)
+    #sanders_2_simulation = Specification(year=cyr)
+    #sanders_2_simulation.update_specification(sanders_2)
+    #calc_sanders_2 = Calculator(sanders_2_simulation, assets)
     #Sanders Step 3
     #sanders_3_simulation = Specification(year=cyr)
     #sanders_3_simulation.update_specification(sanders_3)
@@ -136,12 +136,12 @@ for cyr in range(2020,2030):
     #Create Year indicator
 
     #Assets
-    baseline_asset_df['year'] = str(cyr)
+    baseline_asset_df['year'] = str(cyr + 1)
     #warren_asset_df['year'] = str(cyr)
-    biden_asset_df['year'] = str(cyr)
+    biden_asset_df['year'] = str(cyr + 1)
     #sanders_asset_df['year'] = str(cyr)
-    biden_1_df['year'] = str(cyr)
-    biden_2_df['year'] = str(cyr)
+    biden_1_df['year'] = str(cyr + 1)
+    biden_2_df['year'] = str(cyr + 1)
     #sanders_1_df['year'] = str(cyr)
     #sanders_2_df['year'] = str(cyr)
     #sanders_3_df['year'] = str(cyr)
