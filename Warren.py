@@ -147,9 +147,9 @@ for cyr in range(2020,2030):
     #sanders_3_df['year'] = str(cyr)
 
     #Industry
-    baseline_industry_df['year'] = str(cyr)
+    baseline_industry_df['year'] = str(cyr + 1)
     #warren_industry_df['year'] = str(cyr)
-    biden_industry_df['year'] = str(cyr)
+    biden_industry_df['year'] = str(cyr + 1)
     #sanders_industry_df['year'] = str(cyr)
 
 
